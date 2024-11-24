@@ -1,4 +1,14 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createSelector } from '@reduxjs/toolkit';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+
+
+export interface Pokemon {
+    name: string;
+    sprites: {
+        front_default: string;
+    }
+}
 
 export const pokemonApiSlice = createApi({
     reducerPath: 'pokemonApi',
@@ -6,7 +16,7 @@ export const pokemonApiSlice = createApi({
         baseUrl: 'https://pokeapi.co/api/v2/'
     }),
     endpoints: (builder) => ({
-        getPokemonByName: builder.query<any, string>({ // TODO: replace any with Pokemon interface
+        getPokemonByName: builder.query<Pokemon, string | null>({
             query: (name) => `pokemon/${name}`
         })
     })

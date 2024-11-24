@@ -1,7 +1,8 @@
 import { useDisclosure } from "@mantine/hooks";
 import "./App.css"
-import { useGetPokemonByNameQuery } from "./features/pokemon/pokemonApiSlice"
 import { AppShell, Burger, Group, Pill, Skeleton } from '@mantine/core';
+import Nav from "./shared/components/Nav";
+import Image from "./features/pokemon/Image";
 
 const App = () => {
   const [opened, { toggle }] = useDisclosure();
@@ -19,14 +20,11 @@ const App = () => {
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
-        Navbar
-        {Array(15)
-          .fill(0)
-          .map((_, index) => (
-            <Skeleton key={index} h={28} mt="sm" animate={false} />
-          ))}
+        <Nav />
       </AppShell.Navbar>
-      <AppShell.Main>Main</AppShell.Main>
+      <AppShell.Main>
+        <Image />
+      </AppShell.Main>
     </AppShell>
   );
 }
