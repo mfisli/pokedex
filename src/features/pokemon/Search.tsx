@@ -1,10 +1,14 @@
 import { useState } from "react";
-import { CloseButton, Flex, Input, ScrollArea } from "@mantine/core";
+import { Button, CloseButton, Flex, Input, Text } from "@mantine/core";
 import { useGetPokemonByNameQuery } from "../../features/pokemon/pokemonApiSlice";
 import allNames from "../../constants/pokemonNamesGen1";
+import getPokemonList from "../../utils/getPokemonList";
 import { useNavigate } from "react-router";
+
+const list = getPokemonList();
+
 const Search = () => {
-    const [filteredNames, setFilteredNames] = useState([...allNames])
+    const [filteredNames, setFilteredNames] = useState([...list])
     const [value, setValue] = useState("");
     const [query, setQuery] = useState("");
     useGetPokemonByNameQuery(
@@ -19,8 +23,8 @@ const Search = () => {
         const searchQuery = event?.currentTarget?.value || "";
         setValue(searchQuery)
         setFilteredNames(
-            [...allNames]
-                .filter(item => item.includes(
+            [...list]
+                .filter(item => item.name.includes(
                     searchQuery.trim()
                         .toLowerCase()
                 ))
@@ -50,7 +54,18 @@ const Search = () => {
             <Flex direction={'column'}>
                 {filteredNames.length
                     ? filteredNames.map(item =>
-                        <button key={item} onClick={() => handleClick(item)}>{item}</button>
+                        <Button
+                            color="gray"
+                            justify="start"
+                            mb='2'
+                            key={item.number}
+                            onClick={() => handleClick(item.name)}
+                        >
+                            <img key={item.number} src={`${item.menuSpriteFile}`} />
+                            <Text ps="5">
+                                {`#${item.number} ${item.name}`}
+                            </Text>
+                        </Button>
                     )
                     : null}
                 {!filteredNames.length && <p>No Results</p>}
