@@ -3,14 +3,14 @@ import "./App.css"
 import { AppShell, Burger, Group, Pill, Skeleton } from '@mantine/core';
 import Nav from "./shared/components/Nav";
 import Image from "./features/pokemon/Image";
+import { Outlet, Route, Routes } from "react-router";
 
 const App = () => {
   const [opened, { toggle }] = useDisclosure();
-
   return (
     <AppShell
       header={{ height: 60 }}
-      navbar={{ width: 300, breakpoint: 'sm', collapsed: { mobile: !opened } }}
+      navbar={{ width: 60, breakpoint: 'sm', collapsed: { mobile: !opened } }}
       padding="md"
     >
       <AppShell.Header>
@@ -23,7 +23,7 @@ const App = () => {
         <Nav />
       </AppShell.Navbar>
       <AppShell.Main>
-        <Image />
+        <Outlet />
       </AppShell.Main>
     </AppShell>
   );

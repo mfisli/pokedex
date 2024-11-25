@@ -6,6 +6,9 @@ import { store } from "./app/store"
 import "./index.css"
 import '@mantine/core/styles.css';
 import { MantineProvider } from '@mantine/core';
+import { BrowserRouter, Route, Routes } from "react-router";
+import SearchPage from "./features/pokemon/SearchPage"
+
 
 const container = document.getElementById("root")
 
@@ -14,11 +17,18 @@ if (container) {
 
   root.render(
     <StrictMode>
-      <Provider store={store}>
-        <MantineProvider>
-          <App />
-        </MantineProvider>
-      </Provider>
+      <MantineProvider>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Routes>
+              <Route element={<App />} >
+                <Route index element={<p>home</p>} />
+                <Route path="search/:id?" element={<SearchPage />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </Provider>
+      </MantineProvider>
     </StrictMode>,
   )
 } else {

@@ -5,9 +5,16 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export interface Pokemon {
     name: string;
+    height: number;
     sprites: {
         front_default: string;
     }
+    types: {
+        slot: number,
+        type: {
+            name: string;
+        }
+    }[]
 }
 
 export const pokemonApiSlice = createApi({
