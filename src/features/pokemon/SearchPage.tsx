@@ -1,13 +1,28 @@
-import { Container, Flex, Group, ScrollArea, Stack } from "@mantine/core";
+import { Card, Container, Flex, Group, ScrollArea, Image, Title, Text, Badge, Button, Grid } from "@mantine/core";
 import Search from "./Search";
-import Image from "./Image";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useGetPokemonByNameQuery } from "./pokemonApiSlice";
-import Audio from "../../shared/components/Audio";
+import NextCard from "../../shared/components/NextCard";
+import Detail from "./Detail";
+import { getNeighborsByName } from "../../utils/getPokemonList";
 
 const SearchPage = () => {
-    let { id } = useParams();
-    const { data } = useGetPokemonByNameQuery(id || "", { skip: !id });
+    const navigate = useNavigate();
+    let { name } = useParams();
+    const { data } = useGetPokemonByNameQuery(name || "", { skip: !name });
+    const [prev, next] = getNeighborsByName(name || "");
+
+    const handlePrev = () => {
+        if (prev) {
+            navigate('/search/' + prev.name);
+        }
+    };
+
+    const handleNext = () => {
+        if (next) {
+            navigate('/search/' + next.name);
+        }
+    };
 
     return (
         <Group>
@@ -15,23 +30,29 @@ const SearchPage = () => {
                 <Search />
             </ScrollArea>
             <Container>
-                <Flex justify={{ sm: 'center' }} direction={'column'}>
+                <Flex justify='start' align='top'>
                     {data &&
-                        <>
-                            <Image url={data?.sprites.front_default} alt={data?.name} />
-                            <h2>{data?.name}</h2>
-                            <Audio src={data.cries.legacy} />
-                            <p>Height: {data?.height}</p>
-                            <p>Weight: {data?.weight}</p>
-                            <span>Types</span>
-                            <ul>
-                                {data?.types.map(item =>
-                                    <li key={item.type.name}>{item.type.name}</li>)
-                                }
-                            </ul>
-                        </>
+                        <Grid>
+                            <Grid.Col span={3}>
+                                <Button onClick={handlePrev} variant="outline" color='gray'>
+                                    <Text component="span" tt="capitalize">
+                                        {`← #${prev?.number} ${prev?.name}`}
+                                    </Text>
+                                </Button>
+                            </Grid.Col>
+                            <Grid.Col span={6}>
+                                <Detail />
+                            </Grid.Col>
+                            <Grid.Col span={3}>
+                                <Button onClick={handleNext} variant="outline" color='gray'>
+                                    <Text component="span" tt="capitalize">
+                                        {`#${next?.number} ${next?.name} →`}
+                                    </Text>
+                                </Button>
+                            </Grid.Col>
+                        </Grid>
                     }
-                    {!data && <p>Choose something...</p>}
+                    {!data && <Text>Select an item ...</Text>}
                 </Flex>
             </Container>
         </Group>

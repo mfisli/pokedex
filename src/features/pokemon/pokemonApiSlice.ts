@@ -8,7 +8,13 @@ export interface Pokemon {
     height: number;
     weight: number;
     sprites: {
-        front_default: string;
+        versions: {
+            ['generation-i']: {
+                yellow: {
+                    front_default: string
+                }
+            }
+        }
     }
     types: {
         slot: number,

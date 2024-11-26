@@ -1,8 +1,7 @@
 import { useDisclosure } from "@mantine/hooks";
 import "./App.css"
 import { AppShell, Burger, Group, Pill, Skeleton } from '@mantine/core';
-import Nav from "./shared/components/Nav";
-import Image from "./features/pokemon/Image";
+import NavItems from "./shared/components/NavItems";
 import { Outlet, Route, Routes } from "react-router";
 
 const App = () => {
@@ -10,17 +9,17 @@ const App = () => {
   return (
     <AppShell
       header={{ height: 60 }}
-      navbar={{ width: 60, breakpoint: 'sm', collapsed: { mobile: !opened } }}
+      navbar={{ width: 100, breakpoint: 'sm', collapsed: { mobile: !opened } }}
       padding="md"
     >
       <AppShell.Header>
         <Group h="100%" px="md">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          {/* <MantineLogo size={30} /> */}
+          WIP Pokemon App
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
-        <Nav />
+        <NavItems />
       </AppShell.Navbar>
       <AppShell.Main>
         <Outlet />
