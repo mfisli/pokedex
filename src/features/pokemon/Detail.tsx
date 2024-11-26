@@ -1,4 +1,4 @@
-import { Card, Container, Flex, Group, ScrollArea, Image, Title, Text, Badge } from "@mantine/core";
+import { Card, Flex, Group, Image, Title, Text, Badge } from "@mantine/core";
 import { useParams } from "react-router";
 import { useGetPokemonByNameQuery } from "./pokemonApiSlice";
 import Audio from "../../shared/components/Audio";

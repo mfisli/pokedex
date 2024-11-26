@@ -1,8 +1,6 @@
-import { useRef } from "react";
-
-const Audio = ({ src }) => {
+const Audio = ({ src }: { src: string }) => {
     if (!src) {
-        null;
+        return null;
     }
     return (
         <audio controls key={src}>

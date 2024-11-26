@@ -1,8 +1,8 @@
 import { useDisclosure } from "@mantine/hooks";
 import "./App.css"
-import { AppShell, Burger, Group, Pill, Skeleton } from '@mantine/core';
+import { AppShell, Burger, Group } from '@mantine/core';
 import NavItems from "./shared/components/NavItems";
-import { Outlet, Route, Routes } from "react-router";
+import { Outlet } from "react-router";
 
 const App = () => {
   const [opened, { toggle }] = useDisclosure();

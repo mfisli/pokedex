@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Button, CloseButton, Flex, Input, Text } from "@mantine/core";
 import { useGetPokemonByNameQuery } from "../../features/pokemon/pokemonApiSlice";
-import allNames from "../../constants/pokemonNamesGen1";
 import pokemonList from "../../utils/getPokemonList";
 import { useNavigate, useParams } from "react-router";
 
@@ -18,10 +17,8 @@ const Search = () => {
     );
     const navigate = useNavigate();
 
-    // Ivysaur 
-    // Bulbasaur 
-    const handleChange = (event?) => {
-        const searchQuery = event?.currentTarget?.value || "";
+    const handleChange = (event?: any) => {
+        const searchQuery = event?.target?.value || "";
         setValue(searchQuery)
         setFilteredNames(
             [...list]
@@ -57,7 +54,6 @@ const Search = () => {
             <Flex direction={'column'}>
                 {filteredNames.length
                     ? filteredNames.map(item =>
-                        // set active by param
                         <Button
                             color={name === item.name ? 'dark' : 'gray'}
                             justify="start"
@@ -66,7 +62,7 @@ const Search = () => {
                             key={item.number}
                             onClick={() => handleClick(item.name)}
                         >
-                            <img key={item.number} src={`${item.menuSpriteFile}`} />
+                            <img key={item.number} src={`${item.menuSpriteFile}`} alt={item.name} />
                             <Text ps="5" tt='capitalize'>
                                 {`#${item.number} ${item.name}`}
                             </Text>

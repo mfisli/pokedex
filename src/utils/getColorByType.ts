@@ -1,5 +1,3 @@
-import { useMantineTheme } from "@mantine/core";
-
 export const types = {
     normal: "normal",
     fire: "fire",

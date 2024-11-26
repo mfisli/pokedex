@@ -1,8 +1,7 @@
-import { Card, Container, Flex, Group, ScrollArea, Image, Title, Text, Badge, Button, Grid } from "@mantine/core";
+import { Container, Flex, Group, ScrollArea, Text, Button, Grid } from "@mantine/core";
 import Search from "./Search";
 import { useNavigate, useParams } from "react-router";
 import { useGetPokemonByNameQuery } from "./pokemonApiSlice";
-import NextCard from "../../shared/components/NextCard";
 import Detail from "./Detail";
 import { getNeighborsByName } from "../../utils/getPokemonList";
 
