@@ -6,7 +6,7 @@ import { store } from "./app/store"
 import "./index.css"
 import '@mantine/core/styles.css';
 import { MantineProvider } from '@mantine/core';
-import { BrowserRouter, Link, Route, Routes } from "react-router";
+import { HashRouter, Link, Route, Routes } from "react-router";
 import SearchPage from "./features/pokemon/SearchPage"
 
 
@@ -19,14 +19,14 @@ if (container) {
     <StrictMode>
       <MantineProvider>
         <Provider store={store}>
-          <BrowserRouter>
+          <HashRouter>
             <Routes>
               <Route element={<App />} >
                 <Route index element={<><h1>Home</h1> <Link to="/search/bulbasaur">Search</Link> </>} />
                 <Route path="search/:name?" element={<SearchPage />} />
               </Route>
             </Routes>
-          </BrowserRouter>
+          </HashRouter>
         </Provider>
       </MantineProvider>
     </StrictMode>,
