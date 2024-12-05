@@ -1,13 +1,17 @@
 import type { Action, ThunkAction } from "@reduxjs/toolkit"
 import { combineSlices, configureStore } from "@reduxjs/toolkit"
 import { setupListeners } from "@reduxjs/toolkit/query"
-import { counterSlice } from "../features/counter/counterSlice"
-import { quotesApiSlice } from "../features/quotes/quotesApiSlice"
 import { pokemonApiSlice } from "../features/pokemon/pokemonApiSlice"
+import { trainersApiSlice } from "../features/trainers/trainersApiSlice";
+import { traitsApiSlice } from "../features/traits/traitsApiSlice";
 
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
-const rootReducer = combineSlices(counterSlice, quotesApiSlice, pokemonApiSlice);
+const rootReducer = combineSlices(
+  pokemonApiSlice,
+  trainersApiSlice,
+  traitsApiSlice
+);
 
 // Infer the `RootState` type from the root reducer
 export type RootState = ReturnType<typeof rootReducer>;
@@ -22,8 +26,9 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
     middleware: getDefaultMiddleware => {
       return getDefaultMiddleware()
         .concat(
-          quotesApiSlice.middleware,
-          pokemonApiSlice.middleware
+          pokemonApiSlice.middleware,
+          trainersApiSlice.middleware,
+          traitsApiSlice.middleware
         )
     },
     preloadedState,

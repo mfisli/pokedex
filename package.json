@@ -14,11 +14,12 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "type-check": "tsc --noEmit",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d dist"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@mantine/core": "^7.14.1",
+    "@mantine/form": "^7.14.3",
     "@mantine/hooks": "^7.14.1",
     "@reduxjs/toolkit": "^2.0.1",
     "react": "^18.2.0",
