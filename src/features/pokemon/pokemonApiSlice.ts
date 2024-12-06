@@ -5,6 +5,7 @@ export interface IPokemon {
     _id?: string,
     numberId: number;
     name: string;
+    nickName: string;
     height: number;
     weight: number;
     sound: string;
@@ -36,7 +37,7 @@ export const pokemonApiSlice = createApi({
                 body: pokemon
             })
         }),
-        updatePokemon: builder.mutation<IPokemon, IPokemon>({
+        updatePokemon: builder.mutation<IPokemon, { nickName: string, _id: string}>({
             query: ({_id, ...body}) => ({
                 url: `${pathPrefix}/${_id}`,
                 method: httpMethods.patch,

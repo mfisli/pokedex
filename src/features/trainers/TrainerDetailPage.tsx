@@ -8,6 +8,7 @@ import { useGetTraitsListQuery } from "../traits/traitsApiSlice";
 const TrainerDetailPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+
     const { data } = useGetTrainerQuery(id || "", { skip: !id || id === 'new' });
     const { data: traitsData } = useGetTraitsListQuery();
     const selectTraitsOptions = traitsData

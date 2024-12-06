@@ -1,4 +1,4 @@
-import { IPokemon } from "../features/pokemonCollection/pokemonCollectionApiSlice";
+import { IPokemon } from "../features/pokemon/pokemonApiSlice";
 import { IPokemonIndex } from "../features/pokemonIndex/pokemonIndexApiSlice";
 
 const getSimplePokemonJSON = (complex: IPokemonIndex): IPokemon => ({
