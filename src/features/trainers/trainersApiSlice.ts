@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import httpMethods from '../../utils/httpMethods';
 
 export interface Trainer {
     _id?: string;
@@ -40,7 +41,7 @@ export const trainersApiSlice = createApi({
         createTrainer: builder.mutation<{}, Trainer>({
             query: (trainer) => ({
                 url: pathPrefix,
-                method: 'POST',
+                method: httpMethods.post,
                 body: trainer
             }),
             invalidatesTags: [trainerCacheTags.trainer]
@@ -48,15 +49,15 @@ export const trainersApiSlice = createApi({
         updateTrainer: builder.mutation<{}, Trainer>({
             query: ({_id, ...body}) => ({
                 url: `${pathPrefix}/${_id}`,
-                method: 'PATCH',
-                body: body
+                method: httpMethods.patch,
+                body
             }),
             invalidatesTags: [trainerCacheTags.trainer]
         }),
         deleteTrainer: builder.mutation<void, string>({
             query: (id) => ({
                 url: `${pathPrefix}/${id}`,
-                method: 'DELETE'
+                method: httpMethods.delete
             }),
             invalidatesTags: [trainerCacheTags.trainer]
         })

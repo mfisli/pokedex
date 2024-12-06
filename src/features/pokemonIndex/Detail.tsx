@@ -1,8 +1,9 @@
 import { Card, Flex, Group, Image, Title, Text, Badge } from "@mantine/core";
 import { useParams } from "react-router";
-import { useGetPokemonByNameQuery } from "./pokemonApiSlice";
+import { useGetPokemonByNameQuery } from "./pokemonIndexApiSlice";
 import Audio from "../../shared/components/Audio";
 import getColorByType from "../../utils/getColorByType";
+import getSimplePokemonJSON from "../../utils/getSimplePokemonJSON";
 
 const Detail = () => {
     let { name } = useParams();
@@ -58,6 +59,15 @@ const Detail = () => {
                                 Weight: {data?.weight} kg
                             </Text>
                         </Group>
+                    </Card.Section>
+                    <Card.Section>
+                        <pre>
+                            {JSON.stringify(
+                                getSimplePokemonJSON(data),
+                                null,
+                                4
+                            )}
+                        </pre>
                     </Card.Section>
                 </Card>
             }

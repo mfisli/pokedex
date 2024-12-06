@@ -1,7 +1,7 @@
 import { Container, Flex, Group, ScrollArea, Text, Button, Grid } from "@mantine/core";
 import Search from "./Search";
 import { useNavigate, useParams } from "react-router";
-import { useGetPokemonByNameQuery } from "./pokemonApiSlice";
+import { useGetPokemonByNameQuery } from "./pokemonIndexApiSlice";
 import Detail from "./Detail";
 import { getNeighborsByName } from "../../utils/getPokemonList";
 

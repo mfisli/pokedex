@@ -24,4 +24,4 @@ export const traitsApiSlice = createApi({
 
 export const {
     useGetTraitsListQuery
-} = traitsApiSlice
+} = traitsApiSlice;

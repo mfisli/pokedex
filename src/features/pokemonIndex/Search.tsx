@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, CloseButton, Flex, Input, Text } from "@mantine/core";
-import { useGetPokemonByNameQuery } from "../../features/pokemon/pokemonApiSlice";
+import { useGetPokemonByNameQuery } from "./pokemonIndexApiSlice";
 import pokemonList from "../../utils/getPokemonList";
 import { useNavigate, useParams } from "react-router";
 

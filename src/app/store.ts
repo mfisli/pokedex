@@ -1,14 +1,16 @@
 import type { Action, ThunkAction } from "@reduxjs/toolkit"
 import { combineSlices, configureStore } from "@reduxjs/toolkit"
 import { setupListeners } from "@reduxjs/toolkit/query"
-import { pokemonApiSlice } from "../features/pokemon/pokemonApiSlice"
+import { pokemonIndexApiSlice } from "../features/pokemonIndex/pokemonIndexApiSlice"
 import { trainersApiSlice } from "../features/trainers/trainersApiSlice";
 import { traitsApiSlice } from "../features/traits/traitsApiSlice";
+import { pokemonApiSlice } from "../features/pokemon/pokemonApiSlice";
 
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
 const rootReducer = combineSlices(
   pokemonApiSlice,
+  pokemonIndexApiSlice,
   trainersApiSlice,
   traitsApiSlice
 );
@@ -27,6 +29,7 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
       return getDefaultMiddleware()
         .concat(
           pokemonApiSlice.middleware,
+          pokemonIndexApiSlice.middleware,
           trainersApiSlice.middleware,
           traitsApiSlice.middleware
         )

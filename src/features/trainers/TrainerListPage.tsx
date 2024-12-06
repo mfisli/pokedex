@@ -1,8 +1,10 @@
-import { Tabs, Flex, Group, ScrollArea, Text, Button, Image, Stack, Title, Card, Grid, Container } from "@mantine/core";
-import { Trainer, useCreateTrainerMutation, useGetGeneratedTrainersListQuery, useGetTrainersListQuery } from "./trainersApiSlice";
-import { Link } from "react-router";
+import { Tabs, Container, Text } from "@mantine/core";
+import {
+    useCreateTrainerMutation,
+    useGetGeneratedTrainersListQuery,
+    useGetTrainersListQuery
+} from "./trainersApiSlice";
 import { useGetTraitsListQuery } from "../traits/traitsApiSlice";
-import TrainerCard from "./TrainerCard";
 import TrainersList from "./TrainersList";
 import CandidateTrainerList from "./CandidateTrainerList";
 
@@ -27,7 +29,7 @@ const TrainerListPage = () => {
 
     return (
         <>
-            <h1>Trainers Page</h1>
+            <Text>Trainers Page</Text>
             <Tabs defaultValue={tabItems.staff}>
                 <Tabs.List>
                     <Tabs.Tab value={tabItems.staff}>

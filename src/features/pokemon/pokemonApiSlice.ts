@@ -1,39 +1,61 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import httpMethods from '../../utils/httpMethods';
 
-export interface Pokemon {
+export interface IPokemon {
+    _id?: string,
+    numberId: number;
     name: string;
     height: number;
     weight: number;
-    sprites: {
-        versions: {
-            ['generation-i']: {
-                yellow: {
-                    front_default: string
-                }
-            }
-        }
-    }
-    types: {
-        slot: number,
-        type: {
-            name: string;
-        }
-    }[],
-    cries: {
-        legacy: string
-    },
+    sound: string;
+    image: string;
+    elementalTypeIdList: string[];
+    // moveIdList: Types.ObjectId[];
 }
 
+const baseUrl = 'http://localhost:3000/api/';
+const pathPrefix = 'pokemon';
+
+// TODO tags
 export const pokemonApiSlice = createApi({
     reducerPath: 'pokemonApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://pokeapi.co/api/v2/'
+        baseUrl
     }),
     endpoints: (builder) => ({
-        getPokemonByName: builder.query<Pokemon, string | null>({
-            query: (name) => `pokemon/${name}`
+        getPokemonList: builder.query<IPokemon[], void>({
+            query: () => pathPrefix
+        }),
+        getPokemon: builder.query<IPokemon, string>({
+            query: (id) => `${pathPrefix}/${id}`
+        }),
+        createPokemon: builder.mutation<IPokemon, IPokemon>({
+            query: (pokemon) => ({
+                url: pathPrefix,
+                method: httpMethods.post,
+                body: pokemon
+            })
+        }),
+        updatePokemon: builder.mutation<IPokemon, IPokemon>({
+            query: ({_id, ...body}) => ({
+                url: `${pathPrefix}/${_id}`,
+                method: httpMethods.patch,
+                body
+            })
+        }),
+        deletePokemon: builder.mutation<void, string>({
+            query: (id) => ({
+                url: `${pathPrefix}/${id}`,
+                method:  httpMethods.delete
+            })
         })
     })
 });
 
-export const { useGetPokemonByNameQuery } = pokemonApiSlice;
+export const {
+    useGetPokemonListQuery,
+    useGetPokemonQuery,
+    useCreatePokemonMutation,
+    useUpdatePokemonMutation,
+    useDeletePokemonMutation
+} = pokemonApiSlice;

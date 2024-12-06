@@ -7,9 +7,11 @@ import "./index.css"
 import '@mantine/core/styles.css';
 import { MantineProvider } from '@mantine/core';
 import { HashRouter, Link, Route, Routes } from "react-router";
-import SearchPage from "./features/pokemon/SearchPage"
+import SearchPage from "./features/pokemonIndex/SearchPage"
 import TrainerListPage from "./features/trainers/TrainerListPage"
 import TrainerDetailPage from "./features/trainers/TrainerDetailPage"
+import PokemonListPage from "./features/pokemon/PokemonListPage"
+import PokemonDetailPage from "./features/pokemon/PokemonDetailPage"
 
 
 const container = document.getElementById("root")
@@ -28,6 +30,8 @@ if (container) {
                 <Route path="search/:name?" element={<SearchPage />} />
                 <Route path="trainers" element={<TrainerListPage />} />
                 <Route path="trainers/:id" element={<TrainerDetailPage />} />
+                <Route path="pokemon" element={<PokemonListPage />} />
+                <Route path="pokemon/:id" element={<PokemonDetailPage />} />
               </Route>
             </Routes>
           </HashRouter>
