@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import httpMethods from '../../utils/httpMethods';
+import { IPokemon } from '../pokemon/pokemonApiSlice';
 
 export interface Trainer {
     _id?: string;
@@ -7,7 +8,7 @@ export interface Trainer {
     lastName: string,
     image?: string,
     bio?: string,
-    pokemon?: any[],
+    pokemonIdList?: string[],
     traitIdList?: string[],
     flaws?: any[]
 }
@@ -39,15 +40,15 @@ export const trainersApiSlice = createApi({
             providesTags: [trainerCacheTags.trainer]
         }),
         createTrainer: builder.mutation<{}, Trainer>({
-            query: (trainer) => ({
+            query: (body) => ({
                 url: pathPrefix,
                 method: httpMethods.post,
-                body: trainer
+                body: body
             }),
             invalidatesTags: [trainerCacheTags.trainer]
         }),
         updateTrainer: builder.mutation<{}, Trainer>({
-            query: ({_id, ...body}) => ({
+            query: ({ _id, ...body }) => ({
                 url: `${pathPrefix}/${_id}`,
                 method: httpMethods.patch,
                 body

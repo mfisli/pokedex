@@ -12,6 +12,7 @@ import TrainerListPage from "./features/trainers/TrainerListPage"
 import TrainerDetailPage from "./features/trainers/TrainerDetailPage"
 import PokemonListPage from "./features/pokemon/PokemonListPage"
 import PokemonDetailPage from "./features/pokemon/PokemonDetailPage"
+import TraitsListPage from "./features/traits/TraitsListPage"
 
 
 const container = document.getElementById("root")
@@ -32,6 +33,7 @@ if (container) {
                 <Route path="trainers/:id" element={<TrainerDetailPage />} />
                 <Route path="pokemon" element={<PokemonListPage />} />
                 <Route path="pokemon/:id" element={<PokemonDetailPage />} />
+                <Route path="traits" element={<TraitsListPage />} />
               </Route>
             </Routes>
           </HashRouter>

@@ -8,6 +8,7 @@ const NavItems = () => {
             <Link to="/search">Search</Link>
             <Link to="/trainers">Trainers</Link>
             <Link to="/pokemon">Pokemon</Link>
+            <Link to="/traits">Traits</Link>
         </Stack>
     )
 }
