@@ -1,8 +1,17 @@
 import { Card, Flex, Group, Title, Text, Image } from "@mantine/core"
 import { IPokemon } from "./pokemonApiSlice"
 import Audio from "../../shared/components/Audio"
+import { IElementalType, useGetElementalTypesQuery } from "../elementalTypes/elementalTypesApiSlice"
 
-const PokemonCard = ({ data }: { data: IPokemon }) => {
+const PokemonCard = ({ data, children }: { data: IPokemon, children?: React.ReactNode }) => {
+    const { data: dataTraits } = useGetElementalTypesQuery();
+
+    let traitsMap;
+    traitsMap = dataTraits?.reduce((acc: any, curr: IElementalType) => {
+        acc[curr._id || ""] = curr.name
+        return acc;
+    }, {})
+
     return (
         <Card withBorder radius="md">
             <Card.Section p='md'>
@@ -30,7 +39,9 @@ const PokemonCard = ({ data }: { data: IPokemon }) => {
             </Card.Section>
             <Card.Section px='md' py='sm'>
                 <Group gap={7}>
-                    {JSON.stringify(data.elementalTypeIdList)}
+                    {/* {JSON.stringify(data.elementalTypeIdList)} */}
+                    {traitsMap && data?.elementalTypeIdList
+                        .map(id => <p key={id}>{traitsMap[id]}</p>)}
                 </Group>
             </Card.Section>
             <Card.Section px='md' pb='sm'>
@@ -43,6 +54,11 @@ const PokemonCard = ({ data }: { data: IPokemon }) => {
                     </Text>
                 </Group>
             </Card.Section>
+            {children &&
+                <Card.Section px='md' pb='sm'>
+                    {children}
+                </Card.Section>
+            }
         </Card>
     )
 }

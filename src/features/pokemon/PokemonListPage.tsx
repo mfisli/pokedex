@@ -1,19 +1,36 @@
 import { Link } from "react-router";
 import { useGetPokemonListQuery } from "./pokemonApiSlice";
 import PokemonList from "./PokemonList";
+import { Container, Tabs, Text } from "@mantine/core";
+import CaughtPokemonList from "./CaughtPokemonList";
 
 const tabItems = {
-    collection: "collection",
+    tame: "tame",
     caught: "caught"
 }
 
 const PokemonListPage = () => {
-    const { data } = useGetPokemonListQuery();
-
     return (
         <>
-            <h1>PokemonListPage</h1>
-            <PokemonList />
+            <Text>Trainers Page</Text>
+            <Tabs defaultValue={tabItems.tame}>
+                <Tabs.List>
+                    <Tabs.Tab value={tabItems.tame}>
+                        {tabItems.tame}
+                    </Tabs.Tab>
+                    <Tabs.Tab value={tabItems.caught}>
+                        {tabItems.caught}
+                    </Tabs.Tab>
+                </Tabs.List>
+                <Container pt='md'>
+                    <Tabs.Panel value={tabItems.tame}>
+                        <PokemonList />
+                    </Tabs.Panel>
+                    <Tabs.Panel value={tabItems.caught}>
+                        <CaughtPokemonList />
+                    </Tabs.Panel>
+                </Container>
+            </Tabs>
         </>
     )
 }

@@ -1,10 +1,15 @@
 import { Flex, Grid, Text } from "@mantine/core"
-import { useGetPokemonListQuery } from "./pokemonApiSlice";
+import {
+    pokemonStatuses,
+    useGetPokemonListByStatusQuery
+} from "./pokemonApiSlice";
 import { Link } from "react-router";
 import PokemonCard from "./PokemonCard";
 
 const PokemonList = () => {
-    const { data } = useGetPokemonListQuery();
+    const { data } = useGetPokemonListByStatusQuery(
+        { status: pokemonStatuses.tame }
+    );
 
     return (
         <Grid>
@@ -19,7 +24,8 @@ const PokemonList = () => {
                 <Grid.Col span={12}>
                     <Flex justify='center'>
                         <Text>
-                            No staff pokemon found. Find new pokemon in the candidates tab.
+                            Your pokemon collections is empty.
+                            Find new pokemon in the caught tab.
                         </Text>
                     </Flex>
                 </Grid.Col>

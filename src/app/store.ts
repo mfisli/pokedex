@@ -5,6 +5,7 @@ import { pokemonIndexApiSlice } from "../features/pokemonIndex/pokemonIndexApiSl
 import { trainersApiSlice } from "../features/trainers/trainersApiSlice";
 import { traitsApiSlice } from "../features/traits/traitsApiSlice";
 import { pokemonApiSlice } from "../features/pokemon/pokemonApiSlice";
+import { elementalTypesApiSlice } from "../features/elementalTypes/elementalTypesApiSlice";
 
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
@@ -12,7 +13,8 @@ const rootReducer = combineSlices(
   pokemonApiSlice,
   pokemonIndexApiSlice,
   trainersApiSlice,
-  traitsApiSlice
+  traitsApiSlice,
+  elementalTypesApiSlice
 );
 
 // Infer the `RootState` type from the root reducer
@@ -31,7 +33,8 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
           pokemonApiSlice.middleware,
           pokemonIndexApiSlice.middleware,
           trainersApiSlice.middleware,
-          traitsApiSlice.middleware
+          traitsApiSlice.middleware,
+          elementalTypesApiSlice.middleware
         )
     },
     preloadedState,

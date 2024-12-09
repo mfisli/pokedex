@@ -14,19 +14,6 @@ const tabItems = {
 }
 
 const TrainerListPage = () => {
-    const { data } = useGetTrainersListQuery();
-    const { data: generatedData } = useGetGeneratedTrainersListQuery();
-    const { data: traitsData } = useGetTraitsListQuery();
-    const [createTrainer] = useCreateTrainerMutation();
-
-    let traitsMap = null;
-    traitsMap = traitsData?.reduce((acc: any, curr) => {
-        if (curr._id) {
-            acc[curr._id] = curr.name
-        }
-        return acc;
-    }, {});
-
     return (
         <>
             <Text>Trainers Page</Text>
